@@ -11,13 +11,16 @@ from .views import (
     plane,
     ContractFabric,
     DeletedContracts,
+    hello
 )
 
 app_name = "planes"
 
 
 urlpatterns = [
-    path('', plane, name='planes' ),
+
+    path('plane/', plane, name='planes'),
+    path('', hello, name='index'),
     path('register/', register_view, name='register'),
     path('contracts/', login_required(ContractView.as_view()), name='contracts'),
     path('contracts/create_contract/', ContractFabric.as_view(), name='create_contract'),

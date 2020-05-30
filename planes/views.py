@@ -254,6 +254,11 @@ def adding_click_to_UserActivityJournal(request):
      return HttpResponse('add_click')
 
 
+def hello(request):
+    response = {}
+    return render(request, 'planes/index.html', response)
+
+
 def plane(request,year=dt.now().year):
     finance_costs = FinanceCosts.objects.all()
     if request.method != 'POST':
