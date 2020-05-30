@@ -1,0 +1,203 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+		.info-box {
+			display: flex;
+		}
+		.info-box div {
+			padding: 10px;
+		}
+		.info-box-part_left {
+			flex: 3;
+		}
+        div.column-left {
+            justify-content: start;
+		}
+		.info-box-part_right {
+			flex: 2;
+		}
+		.info-box-part_right p {
+			max-width: 100%;
+			text-align: left;
+			font-family: 'Roboto' ;
+		}
+	</style>
+<div><h1>Справочник "Отчет"</h1></div>
+<div class="info-box">
+	<div class="info-box-part_left">
+		<div class="planning-table">
+
+            <table>
+
+                <tr>
+                    <td class="financing-item">
+                        <div class="td-containers bold">
+                            Наименование
+                        </div>
+                    </td>
+                    <td class="quarters">
+                        <div class="td-containers bold">
+                            Формула
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="td-containers column-left">
+                            Лимит средств (из радела БПиЭА*) – Плановая сумма SAP
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-containers">
+                            &ltХ<sub>кв</sub>&gt - &ltА<sub>кв</sub>&gt
+                        </div>
+                    </td>
+                </tr>
+
+				<tr>
+                    <td>
+                        <div class="td-containers column-left">
+                            Лимит средств – Сумма заключенного договора (по заключенным договорам)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-containers">
+                            &ltХ<sub>кв</sub>&gt - &ltZ<sub>кв</sub>&gt
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="td-containers column-left">
+                            Лимит средств – Прогноз по договорам (только по заключенным договорам)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-containers">
+                            &ltХ<sub>кв</sub>&gt - &ltB<sub>закл.n</sub>&gt
+                        </div>
+                    </td>
+                </tr>
+
+				<tr>
+                    <td>
+                        <div class="td-containers column-left">
+                            Лимит средств – Факт
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-containers">
+                            &ltХ<sub>кв</sub>&gt - &ltC<sub>n</sub>&gt
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="td-containers column-left">
+                            Плановая сумма SAP – Сумма заключенного договора (по заключенным договорам)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-containers">
+                        	&ltА<sub>кв</sub>&gt - &ltZ<sub>кв</sub>&gt
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="td-containers column-left">
+                            Плановая сумма SAP – Прогноз по договорам (только по заключенным договорам)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-containers">
+                        	&ltА<sub>кв</sub>&gt - &ltB<sub>закл.n</sub>&gt
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="td-containers column-left">
+                            Плановая сумма SAP – Факт
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-containers">
+                        	&ltA<sub>кв</sub>&gt - &ltC<sub>n</sub>&gt
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="td-containers column-left">
+                            Сумма заключенного договора (по заключенным договорам) – Прогноз исполнения по договору
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-containers">
+                        	&ltZ<sub>кв</sub>&gt - &ltB<sub>исп.n</sub>&gt
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="td-containers column-left">
+                            Сумма заключенного договора (по заключенным договорам) – Факт
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-containers">
+                        	&ltZ<sub>кв</sub>&gt - &ltC<sub>n</sub>&gt
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="td-containers column-left">
+                            Прогноз исполнения по договору (по заключенным договорам) – Факт
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-containers">
+                        	&ltB<sub>исп.n</sub>&gt - &ltC<sub>n</sub>&gt
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+
+       </div>
+	</div>
+
+	<div class="info-box-part_right">
+		<p><b>&ltХ<sub>кв</sub>&gt</b> — сумма за соответствующий квартал по полю <b><i>Лимит</i></b> средств  по выбранным статье финансирования и куратору,</p>
+		<p><b>&ltА<sub>кв</sub>&gt</b> — сумма за соответствующий квартал по полю <b><i>Плановая сумма SAP</i></b> по выбранным статье финансирования и куратору,</p>
+		<p><b>&ltZ<sub>кв</sub>&gt</b> — сумма за соответствующий квартал по полю <b><i>Сумма заключенного договора</i></b> по выбранным статье финансирования и куратору,</p>
+		<p>где <b>кв</b> — номер квартала.</p>
+		<br>
+		<p><b>&ltB<sub>n</sub>&gt</b> — сумма за соответствующий период по полю <b><i>Прогнозная сумма договора по договорам</i></b> по выбранным статье финансирования и куратору,</p>
+		<p><b>&ltB<sub>закл.n</sub>&gt</b> — сумма за соответствующий период по полю <b><i>Прогнозная сумма договора</i></b> по договорам, имеющим статус “заключен”,  по выбранным статье финансирования и куратору,</p>
+		<p><b>&ltB<sub>исп.n</sub>&gt</b> — сумма за соответствующий период по полю <b><i>Прогнозная сумма договора</i></b> по договорам, имеющим статус “исполнен”,  по выбранным статье финансирования и куратору,</p>
+		<p><b>&ltC<sub>n</sub>&gt</b> — сумма за соответствующий период времени по полю <b><i>Фактическая сумма  договора</i></b> по выбранным статье финансирования и куратору,</p>
+		<p>где <b>n</b> — временной период, выбранный пользователем. Шаг деления 1 день. Для определения периода указывается начальная и конечная дата, выбором из календаря.</p>
+	</div>
+</div>
+
+<div class="plans-buttonsfield">
+    <div class="buttons-container">
+        <button class="button" onclick="history.back()">Назад</button>
+    </div>
+</div>
+{% endblock content %}

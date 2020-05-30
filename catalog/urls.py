@@ -14,5 +14,5 @@ urlpatterns = [
     path('09', views.catalog_contractstatus),
     path('10', views.catalog_usertypes),
     path('11', views.catalog_numberpztru),
-    # path('12', views.catalog_report),
+    path('12', views.catalog_report),
 ]

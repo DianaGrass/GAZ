@@ -5,25 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-Добавление нового контракта<br>
-<form action="" method="post">
+<form method="post">
     {% csrf_token %}
-    <table>
-    {{ contract_form }}
-    </table>
-    <br>
     {{ formset.management_form }}
     <table>
         {% for form in formset %}
         {{ form }}
         {% endfor %}
     </table>
-    <br>
-    <table>
-    {{ rur_form }}
-    </table>
-    <button type="submit">ОК</button>
+    <button type="submit">OK</button>
 </form>
-
 </body>
 </html>

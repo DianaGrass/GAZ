@@ -21,81 +21,82 @@ def index(request):
     return render(request, 'catalog/index.html', context)
 
 def catalog_funding(request):
-    CatalogFormset = modelformset_factory(FinanceCosts, form=forms.CatalogFinanceCostsForm)
+    CatalogFormset = modelformset_factory(FinanceCosts, form=forms.CatalogFinanceCostsForm, extra=0)
     formset = CatalogFormset()
     title = 'Статьи финансирования'
     context = {'formset': formset, 'title': title}
     return render(request, 'catalog/article.html', context)
 
 def catalog_activityform(request):
-    CatalogFormset = modelformset_factory(ActivityForm, form=forms.CatalogActivityFormForm)
+    CatalogFormset = modelformset_factory(ActivityForm, form=forms.CatalogActivityFormForm, extra=0)
     formset = CatalogFormset()
     title = 'Виды деятельности'
     context = {'formset': formset, 'title': title}
     return render(request, 'catalog/article.html', context)
 
 def catalog_curator(request):
-    CatalogFormset = modelformset_factory(Curator, form=forms.CatalogCuratorForm)
+    CatalogFormset = modelformset_factory(Curator, form=forms.CatalogCuratorForm, extra=0)
     formset = CatalogFormset()
     title = 'Кураторы'
     context = {'formset': formset, 'title': title}
     return render(request, 'catalog/article.html', context)
 
 def catalog_contracttype(request):
-    CatalogFormset = modelformset_factory(ContractType, form=forms.CatalogContractTypeForm)
+    CatalogFormset = modelformset_factory(ContractType, form=forms.CatalogContractTypeForm, extra=0)
     formset = CatalogFormset()
     title = 'Типы договора'
     context = {'formset': formset, 'title': title}
     return render(request, 'catalog/article.html', context)
 
 def catalog_contractmode(request):
-    CatalogFormset = modelformset_factory(ContractMode, form=forms.CatalogContractModeForm)
+    CatalogFormset = modelformset_factory(ContractMode, form=forms.CatalogContractModeForm, extra=0)
     formset = CatalogFormset()
     title = 'Виды договора'
     context = {'formset': formset, 'title': title}
     return render(request, 'catalog/article.html', context)
 
 def catalog_purchasetype(request):
-    CatalogFormset = modelformset_factory(PurchaseType, form=forms.CatalogPurchaseTypeForm)
+    CatalogFormset = modelformset_factory(PurchaseType, form=forms.CatalogPurchaseTypeForm, extra=0)
     formset = CatalogFormset()
     title = 'Типы закупки'
     context = {'formset': formset, 'title': title}
     return render(request, 'catalog/article.html', context)
 
 def catalog_stateasez(request):
-    CatalogFormset = modelformset_factory(StateASEZ, form=forms.CatalogStateASEZForm)
+    CatalogFormset = modelformset_factory(StateASEZ, form=forms.CatalogStateASEZForm, extra=0)
     formset = CatalogFormset()
     title = 'Состояния АСЭЗ'
     context = {'formset': formset, 'title': title}
     return render(request, 'catalog/article.html', context)
 
 def catalog_counterpart(request):
-    CatalogFormset = modelformset_factory(Counterpart, form=forms.CatalogCounterpartForm)
+    CatalogFormset = modelformset_factory(Counterpart, form=forms.CatalogCounterpartForm, extra=0)
     formset = CatalogFormset()
     title = 'Контрагенты'
     context = {'formset': formset, 'title': title}
     return render(request, 'catalog/article.html', context)
 
 def catalog_contractstatus(request):
-    CatalogFormset = modelformset_factory(ContractStatus, form=forms.CatalogContractStatusForm)
+    CatalogFormset = modelformset_factory(ContractStatus, form=forms.CatalogContractStatusForm, extra=0)
     formset = CatalogFormset()
     title = 'Статусы договора'
     context = {'formset': formset, 'title': title}
     return render(request, 'catalog/article.html', context)
 
 def catalog_usertypes(request):
-    CatalogFormset = modelformset_factory(UserTypes, form=forms.CatalogUserTypesForm)
+    CatalogFormset = modelformset_factory(UserTypes, form=forms.CatalogUserTypesForm, extra=0)
     formset = CatalogFormset()
     title = 'Типы пользователя'
     context = {'formset': formset, 'title': title}
     return render(request, 'catalog/article.html', context)
 
 def catalog_numberpztru(request):
-    CatalogFormset = modelformset_factory(NumberPZTRU, form=forms.CatalogNumberPZTRUForm)
+    CatalogFormset = modelformset_factory(NumberPZTRU, form=forms.CatalogNumberPZTRUForm, extra=0)
     formset = CatalogFormset()
     title = '№ пункта положения о закупках'
     context = {'formset': formset, 'title': title}
     return render(request, 'catalog/article.html', context)
 
 def catalog_report(request):
-    pass
+    return render(request, 'catalog/report.html')
+

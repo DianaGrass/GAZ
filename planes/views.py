@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,reverse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from .forms import (
@@ -26,9 +26,9 @@ from .models import (
     FinanceCosts, 
     Planning,
 )
-from django.shortcuts import get_object_or_404
-from django.forms import model_to_dict
+from django.urls import reverse
 import json
+from django.forms import formset_factory, modelformset_factory
 
 
 @login_required
@@ -113,12 +113,24 @@ class ContractView(View):
         contract_and_sum = []
 
         for contract in contracts:
-            sum_byn = SumsBYN.objects.get(contract=contract)
+            sums_byn = SumsBYN.objects.filter(contract=contract)
             sum_rur = SumsRUR.objects.get(contract=contract)
+
+            period_byn = {}
+            for sum in sums_byn:
+                sum_dic = {'plan_sum_SAP':sum.plan_sum_SAP,
+                           'contract_sum_without_NDS_BYN':sum.contract_sum_without_NDS_BYN,
+                           'forecast_total':sum.forecast_total,
+                           'economy_total':sum.economy_total,
+                           'fact_total':sum.fact_total,
+                           'economy_contract_result':sum.economy_contract_result}
+
+                period_byn[sum.period] = sum_dic
+
             contract_and_sum.append(
                 {
                     'contract':contract,
-                    'sum_byn':sum_byn,
+                    'sum_byn':period_byn,
                     'sum_rur':sum_rur,
                 }
             )
@@ -146,6 +158,25 @@ class DeletedContracts(View):
 class ContractFabric(View):
     ''' allow to create, change, copy and delete (move to deleted) contracts '''
     create_or_add = 'contracts/add_new_contract.html'
+    periods = [
+        "year",
+        "6months",
+        "9months",
+        "10months",
+        "11months",
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec",
+    ]
 
     def get(self, request, contract_id=None):
         if request.GET.__contains__('from_ajax'):
@@ -156,64 +187,64 @@ class ContractFabric(View):
 
         if request.GET.__contains__('pattern_contract_id'):
             contract_id = int(request.GET['pattern_contract_id'])
-
-        contract_form, sum_byn_form, sum_rur_form = self.make_forms(request, contract_id)
+        if not contract_id:
+            ''' Create new contract with initial sumBYN and sumRUR'''
+            contract_form = ContractForm
+            sum_rur_form = SumsRURForm
+            SumBYNFormSet = formset_factory(SumsBYNForm, extra=0)  # создает НОВЫЕ
+            formset = SumBYNFormSet(initial=[  # для создание нового договора
+                {'period': '1quart'},
+                {'period': '2quart'},
+                {'period': '3quart'},
+                {'period': '4quart'},
+            ])
+        else:
+            SumBYNFormSet = modelformset_factory(SumsBYN, SumsBYNForm, extra=0)  # Берет ИЗ БД
+            formset = SumBYNFormSet(queryset=SumsBYN.objects.filter(contract__id=contract_id))  # для вызова из бд
+            contract_form = ContractForm(instance=get_object_or_404(Contract, id=contract_id))
+            sum_rur_form = SumsRURForm(instance=get_object_or_404(SumsRUR, contract__id=contract_id))
 
         return render(request,
                       template_name=self.create_or_add,
                       context={
-                          'contract_form': contract_form,
-                          'sum_byn_form': sum_byn_form,
-                          'sum_rur_form': sum_rur_form,
+                          'formset': formset,
+                          'contract_form':contract_form,
+                          'rur_form':sum_rur_form,
                       })
 
     def post(self, request, contract_id=None):
-        contract_form, sum_byn_form, sum_rur_form = self.make_forms(request, contract_id)
-
-        if \
-                contract_form.is_valid() \
-                        and sum_byn_form.is_valid() \
-                        and sum_rur_form.is_valid():
-            new_contract = contract_form.save()
-            contract_sum_b = sum_byn_form.save(commit=False)
-            contract_sum_b.contract = new_contract
-            contract_sum_b.save()
-            contract_sum_r = sum_rur_form.save(commit=False)
-            contract_sum_r.contract = new_contract
-            contract_sum_r.save()
-            return HttpResponse('saved')
-
-        return render(request,
-                      template_name=self.create_or_add,
-                      context={
-                          'contract_form': contract_form,
-                          'sum_byn_form': sum_byn_form,
-                          'sum_rur_form': sum_rur_form,
-                      })
-
-    def make_forms(self, request,  contract_id):
-        ''' creates instance objects for forms
-        and
-        return forms based on instance objects '''
         if not contract_id:
+            SumBYNFormSet = formset_factory(SumsBYNForm, extra=0)  # создает НОВЫЕ
             instance_contract = None
-            instance_sum_byn = None
-            instance_sum_rur = None
+            instance_rur = None
+            create_periods_flag = True
         else:
+            SumBYNFormSet = modelformset_factory(SumsBYN, SumsBYNForm, extra=0)  # Берет ИЗ БД
             instance_contract = get_object_or_404(Contract, id=contract_id)
-            instance_sum_byn = get_object_or_404(SumsBYN, contract__id=contract_id)
-            instance_sum_rur = get_object_or_404(SumsRUR, contract__id=contract_id)
+            instance_rur = get_object_or_404(SumsRUR, contract__id=contract_id)
+            create_periods_flag = False
 
-        if request.method == 'POST':
-            contract_form = ContractForm(request.POST, instance=instance_contract)
-            sum_byn_form = SumsBYNForm(request.POST, instance=instance_sum_byn)
-            sum_rur_form = SumsRURForm(request.POST, instance=instance_sum_rur)
+        contract_form = ContractForm(request.POST, instance=instance_contract)
+        sum_rur_form = SumsRURForm(request.POST, instance=instance_rur)
+        formset = SumBYNFormSet(request.POST)
+
+        if sum_rur_form.is_valid() and contract_form.is_valid() and formset.is_valid():
+            new_contract = contract_form.save()
+            for form in formset:
+                new_sum_byn = form.save(commit=False)
+                new_sum_byn.contract = new_contract
+                new_sum_byn.save()
+            if create_periods_flag:
+                for p in self.periods:
+                    new_sum_byn = SumsBYN.objects.create(period=p, contract=new_contract)
+
+            new_sum_rur = sum_rur_form.save(commit=False)
+            new_sum_rur.contract = new_contract
+            new_sum_rur.save()
+            return redirect(reverse('planes:contracts'))
         else:
-            contract_form = ContractForm(None, instance=instance_contract)
-            sum_byn_form = SumsBYNForm(None, instance=instance_sum_byn)
-            sum_rur_form = SumsRURForm(None, instance=instance_sum_rur)
-
-        return contract_form, sum_byn_form, sum_rur_form
+            print(formset.errors)
+            return HttpResponse('Невалидненько')
 
 
 def adding_click_to_UserActivityJournal(request):

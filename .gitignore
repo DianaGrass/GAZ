@@ -4,16 +4,12 @@ db.sqlite3
 **/settings.py
 **/.gitignore
 .vscode
-<<<<<<< HEAD
 static
 /desc
 /Реестр договоров.xlsx
 /desk_lb.txt
 /debug.log
 /analytics/static/styles/
-=======
 .idea
 debug.log
 env
-s
->>>>>>> 3d683b3b73258073e500094c2de14d7bed69d254

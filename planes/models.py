@@ -499,7 +499,7 @@ class SumsBYN(models.Model):
     class Meta:
         verbose_name = 'Показатели договора в белорусских рублях'
         verbose_name_plural = 'Показатели договора в белорусских рублях'
-        unique_together = [['contract', 'year', 'period']]
+       # unique_together = [['contract', 'year', 'period']]
 
     YEARS = [
         ("2018", "2018"),
@@ -581,7 +581,7 @@ class SumsBYN(models.Model):
         default_currency='BYN'
     )
     forecast_total = MoneyField(
-        verbose_name='Прогноз, всего',
+        verbose_name='Прогноз',
         blank=True,
         null=True,
         decimal_places=2,
@@ -612,7 +612,7 @@ class SumsBYN(models.Model):
         max_digits=12,
         default_currency='BYN'
     )
-    total_sum_unsigned_contracts = MoneyField(
+    total_sum_unsigned_contracts = MoneyField( # TODO WTF IT IS
         verbose_name='Сумма средств по незаключенным договорам',
         blank=True,
         null=True,
@@ -634,9 +634,6 @@ class SumsBYN(models.Model):
             return 'Показатели договора %s в белорусских рублях за %s год %s' % (self.contract, self.year, self.period)
         except:
             return 'Ошибка в данных'
-
-
-
 
 
 class ContractRemarks(models.Model):

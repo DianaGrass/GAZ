@@ -3,6 +3,17 @@ body{
     padding: 0;
 }
 
+
+/* body {background-color: #f9f9f9}
+.container {margin-top: 20px;}
+th[draggable] a,
+th[draggable] {cursor: move;}
+th[draggable] a:hover,
+th[draggable] a {display: block; text-decoration: none; color: #333333;}
+.drag {background-color: rgba(0, 0, 0, 0.25); opacity: 0.25}
+.dnd-drag {opacity: 0.25}
+.over {background-color: rgba(0, 0, 255, 0.35);} */
+
 a{
     text-decoration: none;
     font-family: 'Roboto';
@@ -14,13 +25,13 @@ p{
     font-family: 'Roboto' ;
 }
 
-/*nav{*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    flex-wrap: wrap;    */
-/*    max-height: 50px;*/
-/*}*/
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;    
+    max-height: 50px;
+}
 
 .invisible{
     visibility: hidden;
@@ -62,7 +73,7 @@ header{
 /* МЕНЮ */
 
 nav{
-    width: 100%;
+    width: 100wh;
     max-height: 50px;
     display: flex;
     align-items: center;
@@ -136,7 +147,8 @@ nav{
 
 .action-list{
     display: flex;
-    /* margin-left: 84px; */
+    margin-left: 84px;
+    
     margin-bottom: 50px;
 }
 
@@ -152,12 +164,6 @@ td{
     font-size: 17px;
 }
 
-.td-containers{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .table-cont{
     width: 100%;
     /* display: flex;
@@ -165,62 +171,25 @@ td{
     overflow-x:auto;
 }
 
+table{
+    border-collapse: collapse;
+}
+
 /* ТАБЛИЦА АДМИНИСТРИРОВАНИЯ */
 
-.number-table-cell{
-    width: 80px;
-    height: 80px;
+th{
+    border: 1px solid black;
+    font-family: "Roboto";
+    padding: 40px 20px 40px 20px;
 }
 
-.email-table-cell{
-    height: 80px;
-    width: 230px;
+td{
+    padding: 20px;
+    text-align: center;
+    padding: 40px 20px 40px 20px;
 }
 
-.initials-table-cell{
-    height: 80px;
-    width: 80px;
-}
 
-.login-table-cell{
-    height: 80px;
-    width: 230px;
-}
-
-.usertype-table-cell{
-    height: 80px;
-    width: 200px;
-}
-
-.subdivision-table-cell{
-    height: 80px;
-    width: 200px;
-}
-
-.position-table-cell{
-    height: 80px;
-    width: 150px;
-}
-
-.creationdate-table-cell{
-    height: 80px;
-    width: 200px;
-}
-
-.editdate-table-cell{
-    height: 80px;
-    width: 200px;
-}
-
-.actionlist-table-cell{
-    height: 80px;
-    width: 150px;
-}
-
-.active-cell{
-    height: 150px;
-    max-height: 400px;
-}
 /* КОНЕЦ ТАБЛИЧНЫХ СТИЛЕЙ */
 
 #buttonsfield{
@@ -238,7 +207,7 @@ td{
     background-color: transparent;
     padding: 10px;
     cursor: pointer;
-    font-family: 'Roboto';
+    font: 'Roboto';
     color: white;
     width: 200px;
     height: 50px;
@@ -433,8 +402,12 @@ li a{
    }
 
    .action-list-headliner{
-       justify-content: flex-end;
+       justify-content: center;
        align-items: center;
+   }
+
+   .action-list-txt{
+       margin-right: 0;
    }
 
    .container{
@@ -452,5 +425,8 @@ li a{
         margin-bottom: 10px;
    }
 
+   .table-cont{
+       width: 855px;
+   }
 }
-
+/* 

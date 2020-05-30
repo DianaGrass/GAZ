@@ -116,17 +116,17 @@
             <td>{{ con_sum.contract.contract_status }}</td>
             <td>{{ con_sum.contract.plan_load_date_ASEZ }}</td>
             <td>{{ con_sum.contract.fact_load_date_ASEZ }}</td>
-            <td>{{ con_sum.sum_rur.start_max_price_ASEZ_NDS }}</td>
-            <td>{{ con_sum.sum_rur.currency_rate_on_load_date_ASEZ_NDS }}</td>
-            <td>{{ con_sum.sum_rur.contract_sum_NDS_RUB }}</td>
+            <td>{{ con_sum.sum_rur.start_max_price_ASEZ_NDS.amount }}</td>
+            <td>{{ con_sum.sum_rur.currency_rate_on_load_date_ASEZ_NDS.amount }}</td>
+            <td>{{ con_sum.sum_rur.contract_sum_NDS_RUB.amount }}</td>
             <td>{{ con_sum.sum_rur.currency }}</td>
-            <td>{{ con_sum.sum_rur.delta_data_ASEZ }}</td>
-            <td class="no">КГГ?</td>
-            <td>{{ con_sum.sum_byn.plan_sum_SAP }}</td>
-            <td class="no">плановая сумма сап 1</td>
-            <td class="no">плановая сумма сап 2</td>
-            <td class="no">плановая сумма сап 3</td>
-            <td class="no">плановая сумма сап 4</td>
+            <td>{{ con_sum.sum_rur.delta_data_ASEZ.amount }}</td>
+            <td class="no" bgcolor="red">КГГ?</td>
+            <td class="calc" bgcolor="red">{{ con_sum. }}</td>
+            <td>{{ con_sum.sum_byn.1quart.plan_sum_SAP.amount }}</td>
+            <td>{{ con_sum.sum_byn.2quart.plan_sum_SAP.amount }}</td>
+            <td>{{ con_sum.sum_byn.3quart.plan_sum_SAP.amount }}</td>
+            <td>{{ con_sum.sum_byn.4quart.plan_sum_SAP.amount }}</td>
             <td>{{ con_sum.contract.register_number_SAP }}</td>
             <td>{{ con_sum.contract.contract_number }}</td>
             <td>{{ con_sum.contract.plan_sign_date }}</td>
@@ -134,66 +134,66 @@
             <td>{{ con_sum.contract.start_date }}</td>
             <td>{{ con_sum.contract.end_time }}</td>
             <td>{{ con_sum.contract.counterpart }}</td>
-            <td>{{ con_sum.sum_byn.contract_sum_without_NDS_BYN }}</td>
-            <td>где 1 кв</td>
-            <td>где 2 кв</td>
-            <td>где 3 кв</td>
-            <td>где 4 кв</td>
-            <td>{{ con_sum.sum_byn.contract_sum_with_NDS_BYN }}</td>
-            <td>{{ con_sum.sum_byn.contract_total_sum_with_sub_BYN }}</td>
-            <td>{{ con_sum.sum_byn.forecast_total }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum.sum_byn.economy_total }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum.sum_byn.fact_total }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum.sum_byn.economy_contract_result }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum. }}</td>
-            <td>{{ con_sum.sum_byn.total_sum_unsigned_contracts }}</td>
-            <td>{{ con_sum.sum_byn.economy_total_absolute }}</td>
+            <td class="calc" bgcolor="red">{{ con_sum.sum_byn.contract_sum_without_NDS_BYN.amount }}</td>
+            <td>{{ con_sum.sum_byn.1quart.contract_sum_without_NDS_BYN.amount }}</td>
+            <td>{{ con_sum.sum_byn.2quart.contract_sum_without_NDS_BYN.amount }}</td>
+            <td>{{ con_sum.sum_byn.3quart.contract_sum_without_NDS_BYN.amount }}</td>
+            <td>{{ con_sum.sum_byn.4quart.contract_sum_without_NDS_BYN.amount }}</td>
+            <td class="calc" bgcolor="red">{{ con_sum. }}</td>
+            <td class="calc" bgcolor="red">{{ con_sum. }}</td>
+            <td class="calc" bgcolor="red">{{ con_sum. }}</td>
+            <td>{{ con_sum.sum_byn.jan.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.feb.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.mar.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.1quart.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.apr.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.may.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.jun.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.2quart.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.6months.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.jul.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.aug.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.sep.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.3quart.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.9months.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.oct.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.nov.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.dec.forecast_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.4quart.forecast_total.amount }}</td>
+            <td class="calc" bgcolor="red">{{ con_sum. }}</td>
+            <td>{{ con_sum.sum_byn.1quart.economy_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.2quart.economy_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.3quart.economy_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.4quart.economy_total.amount }}</td>
+            <td class="calc" bgcolor="red">{{ con_sum. }}</td>
+            <td>{{ con_sum.sum_byn.1quart.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.jan.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.feb.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.mar.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.2quart.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.apr.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.may.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.jun.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.6months.plan_sum_SAP.amount }}</td>
+            <td>{{ con_sum.sum_byn.6months.fact_total.amount  }}</td>
+            <td>{{ con_sum.sum_byn.3quart.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.jul.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.aug.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.sep.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.9months.plan_sum_SAP.amount }}</td>
+            <td>{{ con_sum.sum_byn.9months.fact_total.amount }}q</td>
+            <td>{{ con_sum.sum_byn.4quart.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.oct.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.10months.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.nov.fact_total.amount }}</td>
+            <td>{{ con_sum.sum_byn.dec.fact_total.amount }}</td>
+            <td class="calc" bgcolor="red">{{ con_sum. }}</td>
+            <td>{{ con_sum.sum_byn.1quart.economy_contract_result }}</td>
+            <td>{{ con_sum.sum_byn.2quart.economy_contract_result }}</td>
+            <td>{{ con_sum.sum_byn.3quart.economy_contract_result }}</td>
+            <td>{{ con_sum.sum_byn.4quart.economy_contract_result }}</td>
+            <td class="calc" bgcolor="red">{{ con_sum. }}</td>
+            <td class="calc" bgcolor="red">{{ con_sum. }}</td>
         </tr>
     {% endfor %}
 </table>
@@ -217,7 +217,7 @@
             });
             console.log(checked);
             $.ajax({
-                'url':'/plane/contracts/create_contract/',
+                'url':'/plane/contracts/copy_contract/',
                 'data': {'contract_id':'con_id',
                         'from_ajax':'del_contract',
                         'choosed':(checked),

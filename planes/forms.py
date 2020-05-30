@@ -9,12 +9,15 @@ from planes.models import (
   )
 
 
-
-
-
 class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'class':'sign-in-textfield',
+        'placeholder':"Login",
+    }))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class':'sign-in-textfield',
+        'placeholder':'Password',
+    }))
 
 
 class RegisterForm(forms.Form):
@@ -28,17 +31,21 @@ class ContractForm(forms.ModelForm):
         exclude = []
 
 
-class SumsBYNForm(forms.ModelForm):
-    class Meta:
-        model = SumsBYN
-        exclude = ['contract']
-
-
 class SumsRURForm(forms.ModelForm):
     class Meta:
         model = SumsRUR
         exclude = ['contract']
 
+
+class SumsBYNForm(forms.ModelForm):
+    class Meta:
+        model = SumsBYN
+        fields = [
+            'period',
+            'plan_sum_SAP',
+            'contract_sum_without_NDS_BYN',
+            'forecast_total',
+            'fact_total']
 
 
 class PlanningForm(forms.ModelForm):
