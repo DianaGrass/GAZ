@@ -202,6 +202,104 @@
 <button class="delete_contract">Удалить контракты</button>
 <button class="copy_contract">Копировать контракт</button>
 <a href="{% url 'planes:deleted_contracts' %}">Уаленные контракты</a>
+
+<br><br>
+<div class="contract_search_div">
+
+    <form action="">
+        <input type="search" name="search_name" placeholder="Введите наименование...">
+        <br>
+        Период: <br>
+        <input type="date" name="search_date1"> - <input type="date" name="search_date2">
+        <br>
+
+        <label for="search_fin_cost">Статья финансирования</label>
+        <select id="search_fin_cost" name="search_fin_cost">
+            <option value="0">---------</option>
+            {% for fin_cost in all_fin_costs %}
+                <option value="{{ fin_cost.id }}">{{ fin_cost }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="search_curator">Куратор</label>
+        <select id="search_curator" name="search_curator">
+            <option value="0">---------</option>
+            {% for curator in all_curators %}
+                <option value="{{ curator.id }}">{{ curator }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+        <label for="search_type">Тип договора</label>
+        <select id="search_type" name="search_type">
+            <option value="0">---------</option>
+            {% for type in all_contract_types %}
+                <option value="{{ type.id }}">{{ type }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+        <label for="search_mode">Вид договора</label>
+        <select id="search_mode" name="search_mode">
+            <option value="0">---------</option>
+            {% for mode in all_contract_modes %}
+                <option value="{{ mode.id }}">{{ mode }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+        <label for="search_purchase_type">Тип закупки</label>
+        <select id="search_purchase_type" name="search_purchase_type">
+            <option value="0">---------</option>
+            {% for purchase in all_purchase_types %}
+                <option value="{{ purchase.id }}">{{ purchase }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+        <label for="search_asez">Состояние АСЭЗ</label>
+        <select id="search_asez" name="search_asez">
+            <option value="0">---------</option>
+            {% for state in all_state_asez %}
+                <option value="{{ state.id }}">{{ state }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+        <label for="search_pztru">№ пункта положения о закупках</label>
+        <select id="search_pztru" name="search_pztru">
+            <option value="0">---------</option>
+            {% for pztru in all_pztru %}
+                <option value="{{ pztru.id }}">{{ pztru }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+        <label for="search_cont_suatus">Статус договора</label>
+        <select id="search_cont_suatus" name="search_cont_suatus">
+            <option value="0">---------</option>
+            {% for status in all_cont_suatus %}
+                <option value="{{ status.id }}">{{ status }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+        <label for="search_counterpart">Контрагент</label>
+        <select id="search_counterpart" name="search_counterpart">
+            <option value="0">---------</option>
+            {% for counterpart in all_counterparts %}
+                <option value=" {{ counterpart.id }}">{{ counterpart }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Найти</button>
+        <a href="{% url 'planes:contracts' %}">Вернуть исходные</a>
+    </form>
+
+</div>
+
+
+
 </body>
 <script>
     $('document').ready(function () {
@@ -209,24 +307,26 @@
             console.log(this.value);
         });
 
-        $('.delete_contract').on('click', function (del_con) {
-            let checked = [];
-            $('input:checkbox:checked').each(function() {
-                checked.push($(this).val());
+        {% if 'planes:delete_contract' in perms %}
+            $('.delete_contract').on('click', function (del_con) {
+                let checked = [];
+                $('input:checkbox:checked').each(function() {
+                    checked.push($(this).val());
 
+                });
+                console.log(checked);
+                $.ajax({
+                    'url':'/plane/contracts/copy_contract/',
+                    'data': {'contract_id':'con_id',
+                            'from_ajax':'del_contract',
+                            'choosed':(checked),
+                            },
+                    success: function (suc) {
+                        console.log('success');
+                    }
+                });
             });
-            console.log(checked);
-            $.ajax({
-                'url':'/plane/contracts/copy_contract/',
-                'data': {'contract_id':'con_id',
-                        'from_ajax':'del_contract',
-                        'choosed':(checked),
-                        },
-                success: function (suc) {
-                    console.log('success');
-                }
-            });
-        });
+        {% endif %}
 
         $('.copy_contract').on('click', function (copy_con) {
             let checked = []

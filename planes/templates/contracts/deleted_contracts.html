@@ -6,7 +6,9 @@
 </head>
 <body>
 {% for contract in contracts %}
-    {{ contract }}<br>
+  
+<a href="{% url 'planes:recover_contract' contract.id %}"> {{ contract }}</a><br>
+
 {% endfor %}
 </body>
 </html>

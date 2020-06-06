@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from djmoney.models.fields import MoneyField
+from django.core.validators import MinValueValidator
 
 
 class Curator(models.Model):
@@ -104,7 +105,7 @@ class UserActivityJournal(models.Model):
 
     def __str__(self):
         try:
-            return f'Журнал действий пользователя: {self.user}'
+            return 'Журнал действий пользователя: {0}'.format(self.user)
         except:
             return 'Ошибка в данных'
 
@@ -589,7 +590,7 @@ class SumsBYN(models.Model):
         default_currency='BYN'
     )
     economy_total = MoneyField(
-        verbose_name='Экономия по заключенному договору, всего',
+        verbose_name='Экономия',
         blank=True,
         null=True,
         decimal_places=2,
@@ -597,7 +598,7 @@ class SumsBYN(models.Model):
         default_currency='BYN'
     )
     fact_total = MoneyField(
-        verbose_name='Факт, всего',
+        verbose_name='Факт',
         blank=True,
         null=True,
         decimal_places=2,
@@ -612,7 +613,7 @@ class SumsBYN(models.Model):
         max_digits=12,
         default_currency='BYN'
     )
-    total_sum_unsigned_contracts = MoneyField( # TODO WTF IT IS
+    total_sum_unsigned_contracts = MoneyField( # TODO wat IT IS
         verbose_name='Сумма средств по незаключенным договорам',
         blank=True,
         null=True,
@@ -652,7 +653,7 @@ class ContractRemarks(models.Model):
 
     def __str__(self):
         try:
-            return f'Примечание к Договору {self.contract}'
+            return 'Примечание к Договору {0}'.format(self.contract)
         except:
             return 'Ошибка в данных'
 
@@ -673,13 +674,7 @@ class ContractPaymentSchedule(models.Model):
 
     def __str__(self):
         try:
-            return f'График платежей по договору : {self.contract}, оплата до: {self.payment_date}'
-        except:
-            return 'Ошибка в данных'
-
-    def __str__(self):
-        try:
-            return 'Показатели договора %s в белорусских рублях за %s год %s' % (self.contract, self.year, self.period)
+            return 'График платежей по договору : {0}, оплата до: {1}'.format(self.contract, self.payment_date)
         except:
             return 'Ошибка в данных'
 
@@ -722,28 +717,28 @@ class Planning(models.Model):
         max_digits=12,
         decimal_places=2,
         default=0,
-        null=True
+        null=True,
     )
     q_2 = models.DecimalField(
         verbose_name="Сумма лимита 2 квартал",
         max_digits=12,
         decimal_places=2,
         default=0,
-        null=True
+        null=True,
     )
     q_3 = models.DecimalField(
         verbose_name="Сумма лимита 3 квартал",
         max_digits=12,
         decimal_places=2,
         default=0,
-        null=True
+        null=True,
     )
     q_4 = models.DecimalField(
         verbose_name="Сумма лимита 4 квартал",
         max_digits=12,
         decimal_places=2,
         default=0,
-        null=True
+        null=True,
     )
     q_all = models.DecimalField(
         verbose_name="Сумма лимита за весь год",
@@ -754,7 +749,7 @@ class Planning(models.Model):
     )
 
     def __str__(self):
-        return f'{self.FinanceCosts.title} : {self.curator.title}'
+        return '{0} : {1}'.format(self.FinanceCosts.title, self.curator.title)
         
     def save(self, *args, **kwargs):
         self.q_all = self.q_1 + self.q_2 + self.q_3 + self.q_4

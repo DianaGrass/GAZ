@@ -29,6 +29,9 @@ class ContractForm(forms.ModelForm):
     class Meta:
         model = Contract
         exclude = []
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder':'введите название'})
+        }
 
 
 class SumsRURForm(forms.ModelForm):
@@ -45,8 +48,67 @@ class SumsBYNForm(forms.ModelForm):
             'plan_sum_SAP',
             'contract_sum_without_NDS_BYN',
             'forecast_total',
-            'fact_total']
+            'fact_total',
+            'economy_total',]
 
+class SumsBYNForm_economist(forms.ModelForm):
+    class Meta:
+        model = SumsBYN
+        fields = [
+            'period',
+            'plan_sum_SAP',
+            'contract_sum_without_NDS_BYN',
+            'forecast_total',
+            'fact_total',
+            'economy_total',]
+        widgets = {
+            'period': forms.Select(attrs={'disabled': True}),
+            'plan_sum_SAP': forms.TextInput(attrs={'readonly':False}),
+            'contract_sum_without_NDS_BYN': forms.TextInput(attrs={'readonly':False}),
+            'forecast_total': forms.TextInput(attrs={'readonly': False}),
+            'fact_total': forms.TextInput(attrs={'readonly': False}),
+            'economy_total': forms.TextInput(attrs={'readonly': True}),
+        }
+
+
+class SumsBYNForm_lawyer(forms.ModelForm):
+    class Meta:
+        model = SumsBYN
+        fields = [
+            'period',
+            'plan_sum_SAP',
+            'contract_sum_without_NDS_BYN',
+            'forecast_total',
+            'fact_total',
+            'economy_total', ]
+        widgets = {
+            'period': forms.Select(attrs={'disabled': True}),
+            'plan_sum_SAP': forms.TextInput(attrs={'readonly':True}),
+            'contract_sum_without_NDS_BYN': forms.TextInput(attrs={'readonly': True}),
+            'forecast_total': forms.TextInput(attrs={'readonly': True}),
+            'fact_total': forms.TextInput(attrs={'readonly': True}),
+            'economy_total': forms.TextInput(attrs={'readonly': True}),
+        }
+
+
+class SumsBYNForm_asez(forms.ModelForm):
+    class Meta:
+        model = SumsBYN
+        fields = [
+            'period',
+            'plan_sum_SAP',
+            'contract_sum_without_NDS_BYN',
+            'forecast_total',
+            'fact_total',
+            'economy_total', ]
+        widgets = {
+            'period': forms.Select(attrs={'disabled':False}),
+            'plan_sum_SAP': forms.TextInput(attrs={'readonly':False}),
+            'contract_sum_without_NDS_BYN': forms.TextInput(attrs={'readonly': False}),
+            'forecast_total': forms.TextInput(attrs={'readonly': False}),
+            'fact_total': forms.TextInput(attrs={'readonly': False}),
+            'economy_total': forms.TextInput(attrs={'readonly': False}),
+        }
 
 class PlanningForm(forms.ModelForm):
     # arr = [ item for item in Curator if item.title != "ALL"]

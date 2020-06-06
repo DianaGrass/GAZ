@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form method="POST" action="{% url 'register' %}">
+<form method="POST" action="{% url 'planes:register' %}">
 {% csrf_token %}
 <p>имя пользователя:{{ form }}</p>
 
