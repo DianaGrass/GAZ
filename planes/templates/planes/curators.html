@@ -1,16 +1,9 @@
-{% extends 'base.html' %}
 
+{% extends 'base.html' %}
 {% load static %} 
 
 {% block content %}
-
-{#<p class="cost-title">{{ finance_cost_name }}</p>#}
-<div class="headline">
-  <h2>{{ finance_cost_name }}</h2>
-</div>
-
-<div id="data-container">
-
+<p class="cost-title">{{ finance_cost_name }}</p>
 <table>
     <tr>
         <th>Куратор</th>
@@ -42,12 +35,8 @@
 
 </table>
 <p><a href="{% url 'planes:add' year finance_cost_id %}">Добавить куратора </a></p>
-
-</div>
-
 <script>
      data_from_django = {{ year }}
 </script>
 <script type="text/javascript" src={% static "planes/js/curators.js" %}></script>
-
 {% endblock content %}

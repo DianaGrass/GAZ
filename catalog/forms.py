@@ -91,3 +91,9 @@ class CatalogCurrency(ModelForm):
         model = Currency
         fields = ('title',)
         widgets = {'title': TextInput(attrs={'readonly': 'readonly'}),}
+
+class CatalogCurrency(ModelForm):
+    class Meta:
+        model = Currency
+        fields = ('title',)
+        widgets = {'title': TextInput(attrs={'readonly': 'readonly'}),}

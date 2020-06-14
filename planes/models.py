@@ -975,6 +975,21 @@ class Planning(models.Model):
         null=True
     )
 
+    q_6_months = models.DecimalField(
+        verbose_name="Сумма лимита за 6 месяцев",
+        max_digits=12,
+        decimal_places=2,
+        default=0,
+        null=True
+    )
+    q_9_months = models.DecimalField(
+        verbose_name="Сумма лимита за 9 месяцев",
+        max_digits=12,
+        decimal_places=2,
+        default=0,
+        null=True
+    )
+
     def __str__(self):
         return '{0} : {1}'.format(self.FinanceCosts.title, self.curator.title)
 

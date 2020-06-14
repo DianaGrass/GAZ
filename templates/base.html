@@ -4,70 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Газпром планировщик</title>
+    <title>Catalog</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
 </head>
 <body>
     <header>
 
-        <div class="media">
-            <a href="/"><img class="logo" src="{% static 'img/gazpromlogo_3.png' %}" alt="logo"></a>
-        </div>
+        <a href="/"><img class="logo" src="{% static 'img/gazpromlogo_2.png' %}" alt="logo"></a>
 
         <div class="user-info">
 
             <a href="/"><p class="user-info-txt">{{ request.user }}</p></a>
             <a href="/"><p class="user-info-txt">{{ request.user.email }}</p></a>
 
-{#            <button class="btn-logout">#}
-{#                <a class="btn-logout-text" href="{% url 'logout' %}">Logout 1</a>#}
-{#            </button>#}
-            <button class="btn-logout" onclick="window.location.href='{% url 'logout' %}';">Logout</button>
-{#            <a href="{% url 'logout' %}"><button class="btn-logout" onclick="{% url 'logout' %}">Logout 3</button></a>#}
-{#            <a class="btn-logout" href="{% url 'logout' %}">Logout</a>#}
-
         </div>
-
-
+        <button class="btn-logout"><a class="btn-logout-text" href="{% url 'logout' %}">Logout</a></button>
 
     </header>
 
     <nav>
-
-    {% with namespace=request.resolver_match.namespace %}
-        <a href="/plane" class="nav-element{% if namespace == 'planes' %} nav-active{% endif %}">
-            Планирование
-        </a>
-        <a href="{% url 'planes:contracts' %}" class="nav-element{% if namespace == 'planes' %} nav-active{% endif %}">
-            Реестр договоров
-        </a>
-        <a href="{% url 'analytics:analytics' %}" class="nav-element{% if namespace == 'analytics' %} nav-active{% endif %}">
-            Аналитика
-        </a>
-
+        <a href="/plane" class="nav-element">Планирование</a>
+        <a href="/" class="nav-element">Реестр договоров</a>
+        <a href="/analytics" class="nav-element">Аналитика</a>
         <a href="/admin" class="nav-element">Администрирование</a>
-        <a href="/catalog" class="nav-element{% if namespace == 'catalog' %} nav-active{% endif %}">
-            Справочники
-        </a>
-        <a href="/notifications" class="nav-element{% if namespace == 'notifications' %} nav-active{% endif %}">
-            Уведомления
-        </a>
-    {% endwith %}
+        <a href="/catalog" class="nav-element">Справочники</a>
+        <a href="/" class="nav-element">Уведомления</a>
     </nav>
 
-    <main>
-        {% block content %}
-        {% endblock content %}
-    </main>
+    {% block content %}
+    {% endblock content %}
 
-	<footer class="footer">
-
-        <div>Филиал «Минское управление магистральных газопроводов»</div>
-        <div>ОАО «Газпром трансгаз Беларусь»</div>
-        <br>
-        <div>Сделано командой «Python hack» (:P)</div>
-
-    </footer>
 </body>
 </html>

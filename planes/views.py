@@ -400,6 +400,12 @@ class ContractFabric(View):
         # else:
         #     return HttpResponse('not laweyr')
 
+        # if request.user.groups.filter(name='lawyers').exists():  # if in group - get permission for fields
+        #     for form in formset_months:
+        #         form.fields['forecast_total'].widget.attrs['contenteditable'] = False
+        # else:
+        #     return HttpResponse('not laweyr')
+
         return render(request,
                       template_name=self.create_or_add,
                       context={
