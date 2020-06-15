@@ -3,10 +3,181 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src={%static "script.js"%}></script>
 
-<p>
-    <h1>content Анализ отклонений</h1>
-</p>
+<div class="container-fluid">
+  <h1> Анализ отклонений</h1>
+  <h4>По статье финансирования {{finance_cost_title}}, по куратору {{curator_title}} за {{year}} год</h4>
 
+  <div class="row">
+    <div class="col-sm-7">
+
+          <table   class="table-responsive" border="1">
+
+    <tr>
+        <th> Показатель </th>
+        <th> 1 квартал </th>
+        <th> 2 квартал </th>
+        <th> 3 квартал </th>
+        <th> 4 квартал </th>
+        <th> 6 месяцев </th>
+        <th> 9 месяцев </th>
+        <th> Год </th>
+    </tr>
+    <tr>
+        <td > {{difference.red_title}}  </td>
+        <td> {{reduced.1quart}}</td>
+        <td> {{reduced.2quart}}</td>
+        <td> {{reduced.3quart}}</td>
+        <td> {{reduced.4quart}}</td>
+        <td> {{reduced.6months}}</td>
+        <td> {{reduced.9months}}</td>
+        <td> {{reduced.year}}</td>
+    </tr>
+
+    <tr>
+        <td> {{difference.sub_title}} </td>
+        <td> {{subtracted.1quart}}</td>
+        <td> {{subtracted.2quart}}</td>
+        <td> {{subtracted.3quart}}</td>
+        <td> {{subtracted.4quart}}</td>
+        <td> {{subtracted.6months}}</td>
+        <td> {{subtracted.9months}}</td>
+        <td> {{subtracted.year}}</td>
+    </tr>
+
+    <tr>
+        <td> Отклонение </td>
+        <td> {{difference.1quart}}</td>
+        <td> {{difference.2quart}}</td>
+        <td> {{difference.3quart}}</td>
+        <td> {{difference.4quart}}</td>
+        <td> {{difference.6months}}</td>
+        <td> {{difference.9months}}</td>
+        <td> {{difference.year}}</td>
+    </tr>
+
+
+</table>
+                <div class="chart-container" style="position: relative">
+
+<canvas id="myChart" ></canvas></div>
+
+    </div>
+
+      <div class="col-sm-4">
+                  <form action="{% url 'analytics:deviation_analysis'  %}" method="get" name="filter" class="form-group">
+    <p><label for="year">Отчетный год </label>
+        <select id="year" size="1" name="select_year" class="form-control" >
+        {% for year in years %}
+            <option id="year_option" selected="selected"> {{year}} </option>
+        {% endfor %}
+        </select></p>
+
+    <p><label for="financeCost">Статья финансирования </label>
+        <select id="financeCost" name="select_cost" size="1" class="form-control">
+        {% for cost in FinanceCosts %}
+        <option id="cost_option" value={{cost.id}} selected="selected">{{cost.title}}</option>
+        {% endfor %}
+        </select></p>
+
+    <p><label for="curator">Куратор </label>
+    <select id='curator' name="select_curator" size="1" class="form-control">
+        {% for curator in curators %}
+        <option id="curator_option" value={{curator.id}} selected="selected">{{curator.title}}</option>
+        {% endfor %}
+    </select></p>
+
+     <p><label for="report">Вариант отклонения</label>
+    <select id='report' name="select_report" size="1" class="form-control">
+        {% for id, report in reports %}
+        <option id="report_option" value={{id}} selected="selected">{{report}}</option>
+        {% endfor %}
+    </select></p>
+
+
+            <input type="submit" class="form_submit" value="OK" >
+
+        </form>
+      </div>
+  </div>
+
+    <div class="row">
+        <div class="col-sm-6" ></div>
+        <div class="col-sm-6">
+            <button type="button" >Печать</button>
+            <button type="button" >Отправить</button>
+            <button type="button" >Сохранить</button>
+            <button type="button" >
+                <a href="{% url 'analytics:analytics' %}">Назад</a></button>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+
+var reducedData = {
+    label: "{{difference.red_title}}",
+    data: [{{reduced.1quart}},
+             {{reduced.2quart}},
+             {{reduced.3quart}},
+             {{reduced.4quart}},
+             {{reduced.6months}},
+             {{reduced.9months}},
+             {{reduced.year}}
+             ],
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgba(255, 99, 132, 1)'
+};
+
+var subtractedData = {
+    label: "{{difference.sub_title}}",
+    data: [{{subtracted.1quart}},
+           {{subtracted.2quart}},
+           {{subtracted.3quart}},
+           {{subtracted.4quart}},
+           {{subtracted.6months}},
+           {{subtracted.9months}},
+           {{subtracted.year}}
+           ],
+    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+    borderColor: 'rgba(54, 162, 235, 1)'
+};
+
+var sumData = {
+    labels: ['1 квартал',
+         '2 квартал',
+          '3 квартал',
+          '4 квартал',
+          '6 месяцев',
+          '9 месяцев',
+          'Год'],
+    datasets: [reducedData, subtractedData]
+    };
+
+var chartOptions = {
+    responsive: true,
+    title:{
+    display:true,
+    text:'Анализ отклонений'}
+
+};
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: sumData,
+    options: chartOptions
+});
+</script>
 
 {% endblock content %}
+
+

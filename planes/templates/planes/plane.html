@@ -2,6 +2,9 @@
 {% load static %}
 
 {% block content %}
+
+<div id="data-container">
+
 <table class="summary-table">
     <tr>
         <th class="table-head">Статья финансирования</th>
@@ -27,7 +30,9 @@
     {{ year_f }}
     <input type="submit" value="Обновить">
 </form>
-<script src="{% static 'planes/js/plane.js' %}"></script>
 
+</div>
+
+<script src="{% static 'planes/js/plane.js' %}"></script>
 
 {% endblock content %}

@@ -10,7 +10,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('plane/', include('planes.urls', namespace='planes')),
-    path('catalog/', include('catalog.urls')),
+    path('catalog/', include('catalog.urls', namespace='catalog')),
     path('analytics/', include('analytics.urls', namespace='analytics')),
-    path('', include('planes.urls', namespace='index')),
+    path('notifications/', include('notifications.urls', namespace='notifications')),
 ]

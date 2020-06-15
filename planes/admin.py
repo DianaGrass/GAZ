@@ -57,7 +57,7 @@ models = (
     ContractMode,
     Counterpart,
     SumsRUR,
-    SumsBYN,
+    #SumsBYN,
 )
 
 
@@ -68,6 +68,11 @@ class ContractAdmin(admin.ModelAdmin):
 
 admin.site.register(Contract, ContractAdmin)
 
+class SumsBYNAdmin(admin.ModelAdmin):
+    list_display = ('contract', 'year', 'period',)
+    list_filter = ('contract', 'year', 'period',)
+
+admin.site.register(SumsBYN, SumsBYNAdmin)
 
 for model in models:
     admin.site.register(model)

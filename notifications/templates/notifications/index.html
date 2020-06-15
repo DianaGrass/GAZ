@@ -1,0 +1,100 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block content %}
+
+{#    <div class="container">#}
+{#        <h1>Уведомления</h1>#}
+{#    </div>#}
+
+    <div class="action-list-headliner">
+            <a href="" class="action-list-txt">Важные</a>
+    </div>
+
+    <div id="data-container">
+
+{#    <div class="notifications-list-container">#}
+            <table class="notification-table">
+
+                <tr>
+                    <td class="notification-status not-default">
+{#                        <div class="td-containers">#}
+{#                        </div>#}
+                    </td>
+                    <td class="notification-date not-default bold">
+{#                        <div class="td-containers">#}
+                        <div>Дата</div>
+                    </td>
+                    <td class="notification-cell not-default bold">
+{#                        <div class="td-containers">#}
+                        <div>Уведомление</div>
+                    </td>
+                </tr>
+{#                --------------------------#}
+
+                <tr>
+                    <td class="notification-status">
+{#                        <div class="td-containers ">#}
+                        <div><input type="checkbox" name="" id=""></div>
+{#                        </div>#}
+                    </td>
+                    <td class="notification-date">
+                        <div class="td-containers active-not-cont">
+                            17.03.2020 08:00
+                        </div>
+                    </td>
+                    <td class="notification-cell">
+                        <div class="td-containers active-not-cont">
+                            До загрузки в АСЭЗ договора о &ltнаименование договора&gt осталось две недели
+                        </div>
+                    </td>
+                </tr>
+{#                --------------------------#}
+
+                <tr>
+                    <td class="notification-status">
+{#                        <div class="td-containers ">#}
+                            <div><input type="checkbox" name="" id=""></div>
+{#                        </div>#}
+                    </td>
+                    <td class="notification-date">
+                        <div class="td-containers active-not-cont">
+                            25.03.2020 08:00
+                        </div>
+                    </td>
+                    <td class="notification-cell">
+                        <div class="td-containers active-not-cont">
+                            Срок действия договора &ltномер договора&gt &ltнаименование договора&gt истекает через 30 дней.
+                        </div>
+                    </td>
+                </tr>
+{#                --------------------------#}
+                <tr>
+                    <td class="notification-status">
+{#                        <div class="td-containers ">#}
+                            <div><input type="checkbox" name="" id=""></div>
+{#                        </div>#}
+                    </td>
+                    <td class="notification-date">
+                        <div class="td-containers active-not-cont">
+                            09.04.2020 08:00
+                        </div>
+                    </td>
+                    <td class="notification-cell">
+                        <div class="td-containers active-not-cont">
+                            Дата следующей оплаты по договору &ltномер договора&gt &ltнаименование договора&gt 09.05.2020 г.
+                        </div>
+                    </td>
+                </tr>
+            </table>
+{#    </div>#}
+
+    </div>
+
+    <div class="buttons-container">
+{#        <button class="button" onclick="">Тест</button>#}
+        <button class="button" onclick="history.back()">Назад</button>
+    </div>
+
+{% endblock content %}

@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = "catalog"
+
 urlpatterns = [
     path('', views.index),
     path('01', views.catalog_funding),
@@ -14,5 +16,6 @@ urlpatterns = [
     path('09', views.catalog_contractstatus),
     path('10', views.catalog_usertypes),
     path('11', views.catalog_numberpztru),
-    path('12', views.catalog_report),
+    path('12', views.catalog_currency),
+    path('13', views.catalog_report),
 ]

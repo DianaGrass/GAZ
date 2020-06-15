@@ -3,11 +3,441 @@
 {% load static %}
 
 {% block content %}
+{#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">#}
 
-<p>
-    <h1>content Исполнение плана по Минскому УМГ</h1>
-</p>
+<div class="headline">
+  <h1>Исполнение плана по Минскому УМГ</h1>
+  <h2>По статье финансирования {{finance_cost_title}}, по куратору {{curator_title}} за год {{year}}</h2>
+</div>
+
+{#<div class="container-fluid">#}
+<div id="data-container">
+
+                <tr>
+                    <td> План по всем договорам </td>
+                    <td> {{plan_sum_sap.1quart}}</td>
+                    <td> {{plan_sum_sap.2quart}}</td>
+                    <td> {{plan_sum_sap.3quart}}</td>
+                    <td> {{plan_sum_sap.4quart}}</td>
+                    <td> {{plan_sum_sap.6months}}</td>
+                    <td> {{plan_sum_sap.9months}}</td>
+                    <td> {{plan_sum_sap.year}}</td>
+                </tr>
+
+    <div class="row container-col-flex">
+
+        <div class="col-sm-5 col-analytics-1">
+            <div class="chart-container" style="position: relative">
+                <canvas id="myChart" ></canvas>
+            </div>
+
+            <table   class="table-responsive" border="1">
+
+                <tr>
+                    <th> Показатель </th>
+                    <th> 1 квартал </th>
+                    <th> 2 квартал </th>
+                    <th> 3 квартал </th>
+                    <th> 4 квартал </th>
+                    <th> 6 месяцев </th>
+                    <th> 9 месяцев </th>
+                    <th> Год </th>
+                </tr>
+                <tr>
+                    {% for plan in planning %}
+                    <td > Лимит средств (План). По заказам ТОРО  </td>
+                    <td> {{plan.q_1}}</td>
+                    <td> {{plan.q_2}}</td>
+                    <td> {{plan.q_3}}</td>
+                    <td> {{plan.q_4}}</td>
+                    <td> {{plan.q_6_months}}</td>
+                    <td> {{plan.q_9_months}}</td>
+                    <td> {{plan.q_all}}</td>
+                </tr>
+            {% endfor %}
+
+                <tr>
+                    <td> План по всем договорам </td>
+                    <td> {{plan_sum_sap.1quart}}</td>
+                    <td> {{plan_sum_sap.2quart}}</td>
+                    <td> {{plan_sum_sap.3quart}}</td>
+                    <td> {{plan_sum_sap.4quart}}</td>
+                    <td> {{plan_sum_sap.6months}}</td>
+                    <td> {{plan_sum_sap.9months}}</td>
+                    <td> {{plan_sum_sap.year}}</td>
+                </tr>
+
+                <tr>
+                    <td> Сумма заключенных договоров </td>
+                    <td> {{contract_sum_without_NDS_BYN.1quart}}</td>
+                    <td> {{contract_sum_without_NDS_BYN.2quart}}</td>
+                    <td> {{contract_sum_without_NDS_BYN.3quart}}</td>
+                    <td> {{contract_sum_without_NDS_BYN.4quart}}</td>
+                    <td> {{contract_sum_without_NDS_BYN.6months}}</td>
+                    <td> {{contract_sum_without_NDS_BYN.9months}}</td>
+                    <td> {{contract_sum_without_NDS_BYN.year}}</td>
+                </tr>
+
+                <tr>
+                    <td> Факт </td>
+                    <td> {{fact_total.1quart}}</td>
+                    <td> {{fact_total.2quart}}</td>
+                    <td> {{fact_total.3quart}}</td>
+                    <td> {{fact_total.4quart}}</td>
+                    <td> {{fact_total.6months}}</td>
+                    <td> {{fact_total.9months}}</td>
+                    <td> {{fact_total.year}}</td>
+                </tr>
+
+                <tr>
+                    <td> Прогноз </td>
+                    <td> {{forecast_total.1quart}}</td>
+                    <td> {{forecast_total.2quart}}</td>
+                    <td> {{forecast_total.3quart}}</td>
+                    <td> {{forecast_total.4quart}}</td>
+                    <td> {{forecast_total.6months}}</td>
+                    <td> {{forecast_total.9months}}</td>
+                    <td> {{forecast_total.year}}</td>
+                </tr>
+
+                 <tr>
+                    <td> % выполнения плана </td>
+                    <td> {%widthratio fact_total.1quart plannings.q_1 100%} %</td>
+                    <td> {%widthratio fact_total.2quart plannings.q_2 100%} %</td>
+                    <td> {%widthratio fact_total.3quart plannings.q_3 100%} %</td>
+                    <td> {%widthratio fact_total.4quart plannings.q_4 100%} %</td>
+                    <td> {%widthratio fact_total.6months plannings.q_6_months 100%} %</td>
+                    <td> {%widthratio fact_total.9months plannings.q_9_months 100%} %</td>
+                    <td> {%widthratio fact_total.year plannings.q_all 100%} %</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="col-sm-3 col-analytics-2">
+
+            <div class="chart-container" style="position: relative">
+                <canvas id="contractCountAll" width="250" height="250"></canvas>
+            </div>
+
+            <div class="chart-container" style="position: relative">
+                <canvas id="contractCountSub" width="250" height="250"></canvas>
+            </div>
+
+            <div class="chart-container" style="position: relative">
+                <canvas id="contractCountCentre" width="250" height="250"></canvas>
+            </div>
+
+        </div>
+
+        <div class="col-sm-2 col-analytics-3">
+                  <form action="{% url 'analytics:implementation_plan'  %}" method="get" name="filter" class="form-group">
+    <p><label for="year">Отчетный год </label>
+        <select id="year" size="1" name="select_year" class="form-control" >
+        {% for year in years %}
+            <option id="year_option" selected="selected"> {{year}} </option>
+        {% endfor %}
+        </select></p>
+
+    <p><label for="financeCost">Статья финансирования </label>
+        <select id="financeCost" name="select_cost" size="1" class="form-control">
+        {% for cost in FinanceCosts %}
+        <option id="cost_option" value={{cost.id}} selected="selected">{{cost.title}}</option>
+        {% endfor %}
+        </select></p>
+
+    <p><label for="curator">Куратор </label>
+    <select id='curator' name="select_curator" size="1" class="form-control">
+        {% for curator in curators %}
+        <option id="curator_option" value={{curator.id}} selected="selected">{{curator.title}}</option>
+        {% endfor %}
+    </select></p>
+
+    <p><label for="contractType">Тип договора </label>
+    <select id='contractType' name="select_contractType" size="1" class="form-control">
+        {% for type in contract_types %}
+        <option id="contractType_option" value={{type.id}} selected="selected">{{type.title}}</option>
+        {% endfor %}
+        <option value="0">Все</option>
+    </select></p>
+
+    <p><label for="contractStatus">Статус договора </label>
+    <select id='contractStatus' name="select_contractStatus" size="1" class="form-control">
+        {% for status in contract_status %}
+        <option id="contractStatus_option" value={{status.id}} selected="selected">{{status.title}}</option>
+        {% endfor %}
+        <option value="0">Все</option>
+    </select></p>
+
+            <input type="submit" class="form_submit" value="OK" >
+
+        </form>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+{#        <div class="col-sm-6" ></div>#}
+{#        <div class="col-sm-6">#}
+{#            <button type="button">Печать</button>#}
+{#            <button type="button">Отправить</button>#}
+{#            <button type="button">Сохранить</button>#}
+{#            <button type="button">#}
+{#                <a href="{% url 'analytics:analytics' %}">Назад</a>#}
+{#            </button>#}
+{#        </div>#}
+
+        <div class="buttons-container">
+            <button class="button" onclick="">Печать</button>
+            <button class="button" onclick="">Отправить</button>
+            <button class="button" onclick="">Сохранить</button>
+            <button class="button" onclick="history.back()">Назад</button>
+{#            <button type="button">#}
+{#                <a href="{% url 'analytics:analytics' %}">Назад</a>#}
+{#            </button>#}
+        </div>
+
+    </div>
+
+</div>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src={%static "script.js"%}></script>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+
+var planningData = {
+    label: "Лимит средств",
+    data: [{{plannings.q_1}},
+             {{plannings.q_2}},
+             {{plannings.q_3}},
+             {{plannings.q_4}},
+             {{plannings.q_6_months}},
+             {{plannings.q_9_months}},
+             {{plannings.q_all}}
+             ],
+    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+    borderColor: 'rgba(255, 206, 86, 1)'
+
+};
+
+var planSumSAPData = {
+    label: "План по договорам",
+    data: [{{plan_sum_sap.1quart}},
+             {{plan_sum_sap.2quart}},
+             {{plan_sum_sap.3quart}},
+             {{plan_sum_sap.4quart}},
+             {{plan_sum_sap.6months}},
+             {{plan_sum_sap.9months}},
+             {{plan_sum_sap.year}}
+             ],
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgba(255, 99, 132, 1)'
+
+};
+
+var contractSumData = {
+    label: "Сумма заключенных договоров",
+    data: [{{contract_sum_without_NDS_BYN.1quart}},
+           {{contract_sum_without_NDS_BYN.2quart}},
+           {{contract_sum_without_NDS_BYN.3quart}},
+           {{contract_sum_without_NDS_BYN.4quart}},
+           {{contract_sum_without_NDS_BYN.6months}},
+           {{contract_sum_without_NDS_BYN.9months}},
+           {{contract_sum_without_NDS_BYN.year}}
+           ],
+    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+    borderColor: 'rgba(54, 162, 235, 1)'
+
+};
+
+var factData = {
+    label: "Факт",
+    data: [{{fact_total.1quart}},
+           {{fact_total.2quart}},
+           {{fact_total.3quart}},
+           {{fact_total.4quart}},
+           {{fact_total.6months}},
+           {{fact_total.9months}},
+           {{fact_total.year}}
+           ],
+    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+    borderColor: 'rgba(153, 102, 255, 1)'
+
+};
+
+var forecastData = {
+    label: "Прогноз",
+    data: [{{forecast_total.1quart}},
+           {{forecast_total.2quart}},
+           {{forecast_total.3quart}},
+           {{forecast_total.4quart}},
+           {{forecast_total.6months}},
+           {{forecast_total.9months}},
+           {{forecast_total.year}}
+           ],
+    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    borderColor: 'rgba(75, 192, 192, 1)'
+
+};
+
+var sumData = {
+    labels: ['1 квартал',
+         '2 квартал',
+          '3 квартал',
+          '4 квартал',
+          '6 месяцев',
+          '9 месяцев',
+          'Год'],
+    datasets: [planningData, planSumSAPData, contractSumData, factData, forecastData]
+    };
+
+var chartOptions = {
+    responsive: true,
+    title:{
+    display:true,
+    text:'Исполнение плана по Минскому УМГ (BYN)'}
+
+};
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: sumData,
+    options: chartOptions
+});
+</script>
+
+<script>
+var ctx = document.getElementById('contractCountAll').getContext('2d');
+
+var countPlan = {
+    label: "Количество планируемых договоров",
+    data: [{{contracts_count_plan.Все}}
+             ],
+    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+    borderColor: 'rgba(255, 206, 86, 1)'
+
+};
+
+var countFact = {
+    label: "Количество заключенных договоров",
+    data: [{{contracts_count_fact.Все}}
+             ],
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgba(255, 99, 132, 1)'
+};
+
+
+var countData = {
+    labels: ['Планируемые','Заключенные'
+          ],
+    datasets: [countPlan, countFact]
+    };
+
+var chartOptions = {
+    responsive: false,
+    title:{
+    display:true,
+    text:'Все договоры'}
+
+};
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: countData,
+    options: chartOptions
+});
+</script>
+
+<script>
+var ctx = document.getElementById('contractCountSub').getContext('2d');
+
+var countPlan = {
+    label: "Количество планируемых договоров",
+    data: [{{contracts_count_plan.Филиал}}
+             ],
+    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+    borderColor: 'rgba(255, 206, 86, 1)'
+
+};
+
+var countFact = {
+    label: "Количество заключенных договоров",
+    data: [{{contracts_count_fact.Филиал}}
+             ],
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgba(255, 99, 132, 1)'
+};
+
+
+var countData = {
+    labels: ['Планируемые','Заключенные'
+          ],
+    datasets: [countPlan, countFact]
+    };
+
+var chartOptions = {
+    responsive: false,
+    title:{
+    display:true,
+    text:'Договоры филиала'}
+
+};
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: countData,
+    options: chartOptions
+});
+</script>
+
+<script>
+var ctx = document.getElementById('contractCountCentre').getContext('2d');
+
+var countPlan = {
+    label: "Количество планируемых договоров",
+    data: [{{contracts_count_plan.Центр}}
+             ],
+    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+    borderColor: 'rgba(255, 206, 86, 1)'
+
+};
+
+var countFact = {
+    label: "Количество заключенных договоров",
+    data: [{{contracts_count_fact.Центр}}
+             ],
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgba(255, 99, 132, 1)'
+};
+
+
+var countData = {
+    labels: ['Планируемые','Заключенные'
+          ],
+    datasets: [countPlan, countFact]
+    };
+
+var chartOptions = {
+    responsive: false,
+    title:{
+    display:true,
+    text:'Централизованные договоры'}
+
+};
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: countData,
+    options: chartOptions
+});
+</script>
 
 {% endblock content %}

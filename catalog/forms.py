@@ -11,6 +11,7 @@ from planes.models import (
     ContractStatus,
     UserTypes,
     NumberPZTRU,
+    Currency,
 )
 
 class CatalogFinanceCostsForm(ModelForm):
@@ -58,7 +59,13 @@ class CatalogStateASEZForm(ModelForm):
 class CatalogCounterpartForm(ModelForm):
     class Meta:
         model = Counterpart
-        fields = ('name',)
+        # fields = ('name',)
+        fields = [
+            'name',
+            'UNP',
+            'reg_addr',
+            'phone',
+            'email', ]
         widgets = {'name': TextInput(attrs={'readonly': 'readonly'}),}
 
 class CatalogContractStatusForm(ModelForm):
@@ -76,5 +83,17 @@ class CatalogUserTypesForm(ModelForm):
 class CatalogNumberPZTRUForm(ModelForm):
     class Meta:
         model = NumberPZTRU
+        fields = ('title',)
+        widgets = {'title': TextInput(attrs={'readonly': 'readonly'}),}
+
+class CatalogCurrency(ModelForm):
+    class Meta:
+        model = Currency
+        fields = ('title',)
+        widgets = {'title': TextInput(attrs={'readonly': 'readonly'}),}
+
+class CatalogCurrency(ModelForm):
+    class Meta:
+        model = Currency
         fields = ('title',)
         widgets = {'title': TextInput(attrs={'readonly': 'readonly'}),}

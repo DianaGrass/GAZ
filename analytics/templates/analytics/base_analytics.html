@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+    <link type="text/css"  rel="stylesheet" href="{% static 'planes/styles/style.css' %}" >
+    <title>plane</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="logo"></div>
+                <div class="user">
+                    <p class="name">Василий</p>
+                    <p class="email">vasya@mail.ri</p>
+                </div>
+            </div>
+    </header>
+    <main class="main">
+        <div class="container">
+            <div class="main-wrapper">
+                <nav class="nav">
+                    <ul class="navigation">
+                        <li class="item"><a class="item-link" href="{% url 'planes:plane' %}">Планирование</a></li>
+                        <li class="item"><a class="item-link" href="#">Реестр договоров</a></li>
+                        <li class="item"><a class="item-link" href="{% url 'analytics:analytics' %}">Аналитика</a></li>
+                        <li class="item"><a class="item-link" href="#">Администрирование</a></li>
+                        <li class="item"><a class="item-link" href="#">Справочники</a></li>
+                        <li class="item"><a class="item-link" href="#">Уведомления</a></li>
+                    </ul>
+                </nav>
+                <div class="content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="wrapper-footer">
+
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

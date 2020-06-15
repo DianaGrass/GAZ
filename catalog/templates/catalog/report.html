@@ -7,26 +7,36 @@
 <style>
 		.info-box {
 			display: flex;
+            flex-wrap: wrap;
 		}
 		.info-box div {
-			padding: 10px;
+			{#padding: 10px;#}
 		}
 		.info-box-part_left {
 			flex: 3;
+            min-width: 400px;
 		}
         div.column-left {
             justify-content: start;
 		}
 		.info-box-part_right {
 			flex: 2;
+            min-width: 400px;
+            padding-left: 20px;
 		}
 		.info-box-part_right p {
-			max-width: 100%;
-			text-align: left;
-			font-family: 'Roboto' ;
+			{#max-width: 100%;#}
+			{#text-align: left;#}
+			{#font-family: 'Roboto' ;#}
 		}
-	</style>
-<div><h1>Справочник "Отчет"</h1></div>
+</style>
+
+<div class="headline">
+    <h1>Справочник "Отчет"</h1>
+</div>
+
+<div id="data-container">
+
 <div class="info-box">
 	<div class="info-box-part_left">
 		<div class="planning-table">
@@ -34,13 +44,15 @@
             <table>
 
                 <tr>
-                    <td class="financing-item">
-                        <div class="td-containers bold">
+{#                    <td class="financing-item">#}
+                    <td>
+                        <div class=" bold">
                             Наименование
                         </div>
                     </td>
-                    <td class="quarters">
-                        <div class="td-containers bold">
+{#                    <td class="quarters">#}
+                    <td>
+                        <div class=" bold">
                             Формула
                         </div>
                     </td>
@@ -48,12 +60,12 @@
 
                 <tr>
                     <td>
-                        <div class="td-containers column-left">
+                        <div class="column-left">
                             Лимит средств (из радела БПиЭА*) – Плановая сумма SAP
                         </div>
                     </td>
                     <td>
-                        <div class="td-containers">
+                        <div class="">
                             &ltХ<sub>кв</sub>&gt - &ltА<sub>кв</sub>&gt
                         </div>
                     </td>
@@ -61,12 +73,12 @@
 
 				<tr>
                     <td>
-                        <div class="td-containers column-left">
+                        <div class="column-left">
                             Лимит средств – Сумма заключенного договора (по заключенным договорам)
                         </div>
                     </td>
                     <td>
-                        <div class="td-containers">
+                        <div class="">
                             &ltХ<sub>кв</sub>&gt - &ltZ<sub>кв</sub>&gt
                         </div>
                     </td>
@@ -74,12 +86,12 @@
 
                 <tr>
                     <td>
-                        <div class="td-containers column-left">
+                        <div class="column-left">
                             Лимит средств – Прогноз по договорам (только по заключенным договорам)
                         </div>
                     </td>
                     <td>
-                        <div class="td-containers">
+                        <div class="">
                             &ltХ<sub>кв</sub>&gt - &ltB<sub>закл.n</sub>&gt
                         </div>
                     </td>
@@ -87,12 +99,12 @@
 
 				<tr>
                     <td>
-                        <div class="td-containers column-left">
+                        <div class="column-left">
                             Лимит средств – Факт
                         </div>
                     </td>
                     <td>
-                        <div class="td-containers">
+                        <div class="">
                             &ltХ<sub>кв</sub>&gt - &ltC<sub>n</sub>&gt
                         </div>
                     </td>
@@ -100,12 +112,12 @@
 
                 <tr>
                     <td>
-                        <div class="td-containers column-left">
+                        <div class="column-left">
                             Плановая сумма SAP – Сумма заключенного договора (по заключенным договорам)
                         </div>
                     </td>
                     <td>
-                        <div class="td-containers">
+                        <div class="">
                         	&ltА<sub>кв</sub>&gt - &ltZ<sub>кв</sub>&gt
                         </div>
                     </td>
@@ -113,12 +125,12 @@
 
                 <tr>
                     <td>
-                        <div class="td-containers column-left">
+                        <div class="column-left">
                             Плановая сумма SAP – Прогноз по договорам (только по заключенным договорам)
                         </div>
                     </td>
                     <td>
-                        <div class="td-containers">
+                        <div class="">
                         	&ltА<sub>кв</sub>&gt - &ltB<sub>закл.n</sub>&gt
                         </div>
                     </td>
@@ -126,12 +138,12 @@
 
                 <tr>
                     <td>
-                        <div class="td-containers column-left">
+                        <div class="column-left">
                             Плановая сумма SAP – Факт
                         </div>
                     </td>
                     <td>
-                        <div class="td-containers">
+                        <div class="">
                         	&ltA<sub>кв</sub>&gt - &ltC<sub>n</sub>&gt
                         </div>
                     </td>
@@ -139,12 +151,12 @@
 
                 <tr>
                     <td>
-                        <div class="td-containers column-left">
+                        <div class="column-left">
                             Сумма заключенного договора (по заключенным договорам) – Прогноз исполнения по договору
                         </div>
                     </td>
                     <td>
-                        <div class="td-containers">
+                        <div class="">
                         	&ltZ<sub>кв</sub>&gt - &ltB<sub>исп.n</sub>&gt
                         </div>
                     </td>
@@ -152,12 +164,12 @@
 
                 <tr>
                     <td>
-                        <div class="td-containers column-left">
+                        <div class="column-left">
                             Сумма заключенного договора (по заключенным договорам) – Факт
                         </div>
                     </td>
                     <td>
-                        <div class="td-containers">
+                        <div class="">
                         	&ltZ<sub>кв</sub>&gt - &ltC<sub>n</sub>&gt
                         </div>
                     </td>
@@ -165,12 +177,12 @@
 
                 <tr>
                     <td>
-                        <div class="td-containers column-left">
+                        <div class="column-left">
                             Прогноз исполнения по договору (по заключенным договорам) – Факт
                         </div>
                     </td>
                     <td>
-                        <div class="td-containers">
+                        <div class="">
                         	&ltB<sub>исп.n</sub>&gt - &ltC<sub>n</sub>&gt
                         </div>
                     </td>
@@ -195,9 +207,12 @@
 	</div>
 </div>
 
-<div class="plans-buttonsfield">
-    <div class="buttons-container">
-        <button class="button" onclick="history.back()">Назад</button>
-    </div>
 </div>
+
+
+<div class="buttons-container">
+{#    <button class="button" onclick="">Тест</button>#}
+    <button class="button" onclick="history.back()">Назад</button>
+</div>
+
 {% endblock content %}

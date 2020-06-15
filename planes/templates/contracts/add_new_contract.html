@@ -1,29 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static '/planes/js/script_form_year.js' %}"></script>
 </head>
 <body>
-Добавление нового контракта<br>
+
 <form action="" method="post">
     {% csrf_token %}
     <table>
     {{ contract_form }}
     </table>
+
     <br>
-    {{ formset.management_form }}
     <table>
-        {% for form in formset %}
-        {{ form }}
+        {{ sum_byn_year_form }}
+    </table>
+    <hr><hr>
+    {{ formset_months.management_form }}
+    <table>
+        {% for form in formset_months %}
+            {{ form }}
         {% endfor %}
     </table>
-    <br>
+    <hr><hr>
+
+    {{ formset_quarts.management_form }}
+    <table>
+        {% for form in formset_quarts %}
+            {{ form }}
+        {% endfor %}
+    </table>
+    <hr><hr>
+
     <table>
     {{ rur_form }}
     </table>
+
     <button type="submit">ОК</button>
 </form>
+
 
 </body>
 </html>

@@ -2,7 +2,18 @@
     font-family: 'FiraSans';
     src: url(../fonts/FiraSans-Regular.ttf);
 }
+/*@font-face{*/
+/*    font-family: 'Roboto';*/
+/*    src: url(../fonts/Roboto-Regular.ttf);*/
+/*}*/
+@font-face{
+    font-family: 'Roboto-Light';
+    /*font-weight: 300;*/
+    src: url(../fonts/Roboto-Light.ttf);
+}
+
 @font-face{
     font-family: 'Roboto';
+    /*font-weight: 300;*/
     src: url(../fonts/Roboto-Regular.ttf);
 }

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'catalog'
+    'catalog',
+    'notifications'
 ]
 
 MIDDLEWARE = [
@@ -79,16 +80,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'BelGaz.wsgi.application'
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        'NAME': "germany_db",
-        "USER": "germany_user",
-        "PASSWORD": "1050Xx27",
-        "HOST": "35.223.197.213",
-        "PORT": "5432",
-    }
-}
 
 
 
@@ -165,7 +156,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/plane/'
 LOGOUT_REDIRECT_URL = '/'
 
 

@@ -15,10 +15,11 @@
 
         <div class="user-info">
 
-            <a href="/"><p class="user-info-txt">UserName</p></a>
-            <a href="/"><p class="user-info-txt">UserEmail</p></a>
+            <a href="/"><p class="user-info-txt">{{ request.user }}</p></a>
+            <a href="/"><p class="user-info-txt">{{ request.user.email }}</p></a>
 
         </div>
+        <button class="btn-logout"><a class="btn-logout-text" href="{% url 'logout' %}">Logout</a></button>
 
     </header>
 

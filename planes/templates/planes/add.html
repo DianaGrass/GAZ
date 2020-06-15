@@ -2,11 +2,14 @@
 
 {% block content %}
 
+<div id="data-container">
+
 <form action="{% url 'planes:add' year finance_cost_id %}" method="post" >
     {% csrf_token %}
     {{ plane_form.as_p }}
     <input type="submit" value="Add">
 </form>
+
+</div>
   
 {% endblock content %}
-

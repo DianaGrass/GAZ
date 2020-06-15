@@ -2,11 +2,14 @@
 
 {% block content %}
 
+<div id="data-container">
+
 <form action="{% url 'planes:edit_plane' year item_id %}" method="post" >
     {% csrf_token %}
     {{ plan_form.as_p }}
     <input type="submit" value="Ok">
 </form>
 
+</div>
   
 {% endblock content %}

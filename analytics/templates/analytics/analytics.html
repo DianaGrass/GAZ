@@ -3,9 +3,12 @@
 
 {% block content %}
 
-<p><h1><a href="{% url 'analytics:implementation_plan' %}">Исполнение плана по Минскому УМГ</a></h1></p>
-<p><h1><a href="{% url 'analytics:deviation_analysis' %}">Анализ отклонений</a></h1></p>
-<p><h1><a href="{% url 'analytics:report_RKDZ' %}">Отчет RKDZ</a></h1></p>
+    <div id="data-container">
+        <ul>
+            <li><a href="{% url 'analytics:implementation_plan' %}">Исполнение плана по Минскому УМГ</a></li>
+            <li><a href="{% url 'analytics:deviation_analysis' %}">Анализ отклонений</a></li>
+            <li><a href="{% url 'analytics:report_RKDZ' %}">Отчет RKDZ</a></li>
+        </ul>
+    </div>
 
 {% endblock content %}
-
